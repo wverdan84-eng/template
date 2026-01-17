@@ -1,46 +1,58 @@
 "use client";
 import React from 'react';
-import { CreditCard, Gift, ArrowUpRight, Zap } from 'lucide-react';
+import { Instagram, Linkedin, Github, Twitter, Globe, Share2 } from 'lucide-react';
 
-export default function CustomerWallet() {
+export default function BioPremium() {
+  const links = [
+    { name: "Instagram", url: "#", icon: Instagram, color: "bg-pink-500" },
+    { name: "LinkedIn", url: "#", icon: Linkedin, color: "bg-blue-600" },
+    { name: "Twitter / X", url: "#", icon: Twitter, color: "bg-zinc-800" },
+    { name: "Meu Portfolio", url: "#", icon: Globe, color: "bg-emerald-500" },
+  ];
+
   return (
-    <div className="min-h-screen bg-black text-white font-sans p-5">
-      {/* Header Estilo Apple */}
-      <header className="flex justify-between items-center py-6">
-        <h1 className="text-xl font-medium tracking-tight">Retenção<span className="text-blue-500">Total</span></h1>
-        <div className="h-10 w-10 rounded-full bg-gradient-to-tr from-blue-500 to-purple-600 flex items-center justify-center">
-          <Zap size={20} fill="white" />
-        </div>
-      </header>
+    <div className="min-h-screen bg-[#050505] text-white flex flex-col items-center p-6 font-sans selection:bg-blue-500">
+      {/* Círculos de Luz de Fundo (Aura) */}
+      <div className="fixed top-[-10%] left-[-10%] w-[50%] h-[50%] bg-blue-600/20 blur-[120px] rounded-full" />
+      <div className="fixed bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-purple-600/20 blur-[120px] rounded-full" />
 
-      {/* Card de Cashback */}
-      <div className="bg-gradient-to-br from-zinc-800 to-zinc-900 rounded-[2rem] p-8 border border-zinc-700 shadow-2xl mb-6">
-        <p className="text-zinc-400 text-sm mb-1 uppercase tracking-widest font-bold">Saldo Acumulado</p>
-        <h2 className="text-5xl font-black mb-4">R$ 45,90</h2>
-        <div className="flex gap-2">
-          <span className="bg-blue-500/10 text-blue-400 px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1">
-            <ArrowUpRight size={14} /> +12% esse mês
-          </span>
+      {/* Header Profissional */}
+      <div className="relative mt-12 mb-8 flex flex-col items-center">
+        <div className="w-28 h-28 rounded-full p-[2px] bg-gradient-to-tr from-blue-500 to-purple-600 shadow-2xl shadow-blue-500/20">
+          <img 
+            src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" 
+            alt="Avatar" 
+            className="w-full h-full rounded-full bg-zinc-900 border-4 border-black"
+          />
         </div>
+        <h1 className="mt-4 text-2xl font-black tracking-tight">Washington Verdan</h1>
+        <p className="text-zinc-400 font-medium">Full Stack Developer & Tech Enthusiast</p>
       </div>
 
-      {/* Progressão de Nível */}
-      <div className="bg-zinc-900 rounded-[1.5rem] p-6 border border-zinc-800 mb-6">
-        <div className="flex justify-between items-end mb-4">
-          <div>
-            <h3 className="font-bold text-lg leading-tight">Cliente VIP Prata</h3>
-            <p className="text-zinc-500 text-sm">Faltam 3 visitas para o Nível Ouro</p>
-          </div>
-          <Gift className="text-blue-500" size={28} />
-        </div>
-        <div className="w-full bg-zinc-800 h-3 rounded-full overflow-hidden">
-          <div className="bg-blue-500 h-full w-[70%] rounded-full shadow-[0_0_15px_rgba(59,130,246,0.5)]"></div>
-        </div>
-      </div>
+      {/* Grid de Links Estilo Apple */}
+      <main className="w-full max-w-[400px] z-10 space-y-4">
+        {links.map((link, i) => (
+          <a
+            key={i}
+            href={link.url}
+            className="group flex items-center p-4 bg-zinc-900/50 border border-zinc-800 backdrop-blur-xl rounded-2xl hover:scale-[1.02] hover:bg-zinc-800/80 transition-all duration-300 shadow-lg"
+          >
+            <div className={`${link.color} p-3 rounded-xl shadow-lg group-hover:rotate-12 transition-transform`}>
+              <link.icon size={20} color="white" />
+            </div>
+            <span className="ml-4 font-bold text-lg">{link.name}</span>
+            <Share2 size={16} className="ml-auto text-zinc-600 group-hover:text-blue-400" />
+          </a>
+        ))}
+      </main>
 
-      <button className="w-full bg-white text-black py-5 rounded-2xl font-black text-lg hover:bg-zinc-200 transition-all active:scale-95">
-        RESGATAR BENEFÍCIO
-      </button>
+      {/* Rodapé Viral */}
+      <footer className="mt-auto py-8 text-zinc-500 text-xs flex flex-col items-center gap-4">
+        <button className="bg-white/5 hover:bg-white/10 px-6 py-2 rounded-full border border-white/10 transition-colors">
+          Obter uma página como esta 🚀
+        </button>
+        <p>© 2026 • Built with Gemini</p>
+      </footer>
     </div>
   );
 }
