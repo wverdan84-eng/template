@@ -1,43 +1,46 @@
 "use client";
-import React, { useState, useEffect } from 'react';
-import { Star, CheckCircle, Trophy } from 'lucide-react';
+import React from 'react';
+import { CreditCard, Gift, ArrowUpRight, Zap } from 'lucide-react';
 
-export default function CustomerPage() {
-  const [points, setPoints] = useState(0);
-
-  // Macete: Simulando dados do banco (Supabase)
-  useEffect(() => {
-    const saved = localStorage.getItem('fideliza_pts');
-    if (saved) setPoints(parseInt(saved));
-  }, []);
-
+export default function CustomerWallet() {
   return (
-    <div className="min-h-screen bg-slate-50 p-4 flex flex-col items-center">
-      <div className="bg-white w-full max-w-md rounded-3xl shadow-lg border border-purple-100 overflow-hidden">
-        <div className="bg-purple-600 p-8 text-center text-white">
-          <Trophy className="mx-auto mb-2" size={48} />
-          <h1 className="text-2xl font-bold">Café Gold</h1>
-          <p className="opacity-80">Seu Cartão Fidelidade</p>
+    <div className="min-h-screen bg-black text-white font-sans p-5">
+      {/* Header Estilo Apple */}
+      <header className="flex justify-between items-center py-6">
+        <h1 className="text-xl font-medium tracking-tight">Retenção<span className="text-blue-500">Total</span></h1>
+        <div className="h-10 w-10 rounded-full bg-gradient-to-tr from-blue-500 to-purple-600 flex items-center justify-center">
+          <Zap size={20} fill="white" />
         </div>
+      </header>
 
-        <div className="p-6">
-          <div className="grid grid-cols-5 gap-3 mb-6">
-            {[...Array(10)].map((_, i) => (
-              <div key={i} className={`h-12 w-12 rounded-xl border-2 flex items-center justify-center transition-all
-                ${i < points ? 'bg-green-500 border-green-600 rotate-12' : 'bg-gray-50 border-gray-200'}`}>
-                {i < points ? <CheckCircle size={24} color="white" /> : <Star size={20} color="#cbd5e1" />}
-              </div>
-            ))}
-          </div>
-
-          <div className="bg-purple-50 p-4 rounded-2xl text-center">
-            <p className="text-purple-900 font-medium">
-              Faltam <span className="text-2xl font-black">{10 - points}</span> selos para seu prêmio!
-            </p>
-          </div>
+      {/* Card de Cashback */}
+      <div className="bg-gradient-to-br from-zinc-800 to-zinc-900 rounded-[2rem] p-8 border border-zinc-700 shadow-2xl mb-6">
+        <p className="text-zinc-400 text-sm mb-1 uppercase tracking-widest font-bold">Saldo Acumulado</p>
+        <h2 className="text-5xl font-black mb-4">R$ 45,90</h2>
+        <div className="flex gap-2">
+          <span className="bg-blue-500/10 text-blue-400 px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1">
+            <ArrowUpRight size={14} /> +12% esse mês
+          </span>
         </div>
       </div>
-      <p className="mt-8 text-gray-400 text-xs">Apresente seu código no balcão</p>
+
+      {/* Progressão de Nível */}
+      <div className="bg-zinc-900 rounded-[1.5rem] p-6 border border-zinc-800 mb-6">
+        <div className="flex justify-between items-end mb-4">
+          <div>
+            <h3 className="font-bold text-lg leading-tight">Cliente VIP Prata</h3>
+            <p className="text-zinc-500 text-sm">Faltam 3 visitas para o Nível Ouro</p>
+          </div>
+          <Gift className="text-blue-500" size={28} />
+        </div>
+        <div className="w-full bg-zinc-800 h-3 rounded-full overflow-hidden">
+          <div className="bg-blue-500 h-full w-[70%] rounded-full shadow-[0_0_15px_rgba(59,130,246,0.5)]"></div>
+        </div>
+      </div>
+
+      <button className="w-full bg-white text-black py-5 rounded-2xl font-black text-lg hover:bg-zinc-200 transition-all active:scale-95">
+        RESGATAR BENEFÍCIO
+      </button>
     </div>
   );
 }
