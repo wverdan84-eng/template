@@ -1,37 +1,14 @@
 "use client";
 
-import { useState } from "react";
 import { useSession } from "next-auth/react";
 
 export default function Dashboard() {
   const { data: session } = useSession();
 
-  const [nome, setNome] = useState("");
-  const [cpf, setCpf] = useState("");
-  const [cargo, setCargo] = useState("");
-  const [pedido, setPedido] = useState("");
-  const [resultado, setResultado] = useState("");
-  const [gerou, setGerou] = useState(false);
-
-  function gerarDocumento() {
-    if (session?.user?.role === "FREE" && gerou) {
-      alert("Plano FREE permite apenas 1 documento. Faça upgrade para continuar.");
-      return;
-    }
-
-    const texto = `Eu, ${nome}, portador(a) do CPF ${cpf}, ocupante do cargo ${cargo}, venho por meio deste requerer ${pedido}.
-
-Nestes termos,
-Pede deferimento.`;
-
-    setResultado(texto);
-    setGerou(true);
-  }
-
   return (
     <main style={{ padding: 40, maxWidth: 600 }}>
       <h1>DocPronto BR</h1>
-      <p>Gerador de Requerimento Administrativo</p>
+      <p>Gerador inteligente de documentos</p>
 
       {session?.user?.role === "FREE" && (
         <p style={{ color: "red" }}>
@@ -39,44 +16,36 @@ Pede deferimento.`;
         </p>
       )}
 
-      <input
-        placeholder="Nome completo"
-        value={nome}
-        onChange={(e) => setNome(e.target.value)}
-      />
+      <a href="/documents">
+        <button
+          style={{
+            marginTop: 20,
+            padding: 16,
+            width: "100%",
+            borderRadius: 8,
+            border: "none",
+            cursor: "pointer",
+            background: "#22c55e",
+            fontWeight: "bold",
+          }}
+        >
+          Criar novo documento
+        </button>
+      </a>
 
-      <input
-        placeholder="CPF"
-        value={cpf}
-        onChange={(e) => setCpf(e.target.value)}
-      />
+      <div style={{ marginTop: 40, opacity: 0.8 }}>
+        <p>✔️ Requerimentos</p>
+        <p>✔️ Declarações</p>
+        <p>✔️ Recursos</p>
+        <p>✔️ Ofícios</p>
+        <p>✔️ Trabalhista</p>
+        <p>✔️ Educacional</p>
+      </div>
 
-      <input
-        placeholder="Cargo"
-        value={cargo}
-        onChange={(e) => setCargo(e.target.value)}
-      />
-
-      <textarea
-        placeholder="Descreva seu pedido"
-        value={pedido}
-        onChange={(e) => setPedido(e.target.value)}
-      />
-
-      <button onClick={gerarDocumento}>
-        Gerar documento
-      </button>
-
-      {resultado && (
-        <>
-          <h3>Documento gerado:</h3>
-          <textarea value={resultado} readOnly rows={6} />
-          {session?.user?.role === "FREE" && (
-            <p>
-              👉 <a href="/upgrade">Liberar acesso ilimitado (PRO)</a>
-            </p>
-          )}
-        </>
+      {session?.user?.role === "FREE" && (
+        <p style={{ marginTop: 20 }}>
+          👉 <a href="/upgrade">Liberar acesso PRO</a>
+        </p>
       )}
     </main>
   );
