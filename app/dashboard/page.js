@@ -1,27 +1,62 @@
-import { getServerSession } from "next-auth";
-import { redirect } from "next/navigation";
+"use client";
 
-export default async function Dashboard() {
-  const session = await getServerSession();
+import { useState } from "react";
 
-  if (!session) {
-    redirect("/login");
-  }
+export default function Dashboard() {
+  const [nome, setNome] = useState("");
+  const [cpf, setCpf] = useState("");
+  const [cargo, setCargo] = useState("");
+  const [pedido, setPedido] = useState("");
+  const [resultado, setResultado] = useState("");
 
-  if (session.user.role !== "PRO") {
-    return (
-      <main style={{ padding: 40 }}>
-        <h1>Acesso restrito</h1>
-        <p>Este conteúdo é exclusivo para usuários PRO.</p>
-        <a href="/upgrade">Fazer upgrade</a>
-      </main>
-    );
+  function gerarDocumento() {
+    const texto = `Eu, ${nome}, portador(a) do CPF ${cpf}, ocupante do cargo ${cargo}, venho por meio deste requerer ${pedido}.
+
+Nestes termos,
+Pede deferimento.`;
+
+    setResultado(texto);
   }
 
   return (
-    <main style={{ padding: 40 }}>
-      <h1>Dashboard PRO</h1>
-      <p>Bem-vindo ao conteúdo premium 🔥</p>
+    <main style={{ padding: 40, maxWidth: 600 }}>
+      <h1>DocPronto BR</h1>
+      <p>Gerador de Requerimento Administrativo</p>
+
+      <input
+        placeholder="Nome completo"
+        value={nome}
+        onChange={(e) => setNome(e.target.value)}
+      />
+
+      <input
+        placeholder="CPF"
+        value={cpf}
+        onChange={(e) => setCpf(e.target.value)}
+      />
+
+      <input
+        placeholder="Cargo"
+        value={cargo}
+        onChange={(e) => setCargo(e.target.value)}
+      />
+
+      <textarea
+        placeholder="Descreva seu pedido"
+        value={pedido}
+        onChange={(e) => setPedido(e.target.value)}
+      />
+
+      <button onClick={gerarDocumento}>
+        Gerar documento
+      </button>
+
+      {resultado && (
+        <>
+          <h3>Documento gerado:</h3>
+          <textarea value={resultado} readOnly rows={6} />
+        </>
+      )}
     </main>
   );
 }
