@@ -1,58 +1,65 @@
 "use client";
-import React from 'react';
-import { Instagram, Linkedin, Github, Twitter, Globe, Share2 } from 'lucide-react';
+import React, { useState } from 'react';
+import { TrendingUp, ShieldCheck, DollarSign, Clock, CheckCircle2 } from 'lucide-react';
 
-export default function BioPremium() {
-  const links = [
-    { name: "Instagram", url: "#", icon: Instagram, color: "bg-pink-500" },
-    { name: "LinkedIn", url: "#", icon: Linkedin, color: "bg-blue-600" },
-    { name: "Twitter / X", url: "#", icon: Twitter, color: "bg-zinc-800" },
-    { name: "Meu Portfolio", url: "#", icon: Globe, color: "bg-emerald-500" },
-  ];
+export default function HighTicketROI() {
+  const [val, setVal] = useState(5000); // Investimento
+  const roi = val * 3.5; // Simulação de retorno de 3.5x
 
   return (
-    <div className="min-h-screen bg-[#050505] text-white flex flex-col items-center p-6 font-sans selection:bg-blue-500">
-      {/* Círculos de Luz de Fundo (Aura) */}
-      <div className="fixed top-[-10%] left-[-10%] w-[50%] h-[50%] bg-blue-600/20 blur-[120px] rounded-full" />
-      <div className="fixed bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-purple-600/20 blur-[120px] rounded-full" />
-
-      {/* Header Profissional */}
-      <div className="relative mt-12 mb-8 flex flex-col items-center">
-        <div className="w-28 h-28 rounded-full p-[2px] bg-gradient-to-tr from-blue-500 to-purple-600 shadow-2xl shadow-blue-500/20">
-          <img 
-            src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" 
-            alt="Avatar" 
-            className="w-full h-full rounded-full bg-zinc-900 border-4 border-black"
-          />
+    <div className="min-h-screen bg-[#050505] text-zinc-100 font-sans p-6 selection:bg-emerald-500">
+      {/* Header Lucrativo */}
+      <header className="max-w-4xl mx-auto flex justify-between items-center py-10">
+        <div className="flex items-center gap-2">
+          <div className="w-8 h-8 bg-emerald-500 rounded-lg flex items-center justify-center">
+            <TrendingUp size={20} className="text-black" />
+          </div>
+          <span className="font-black text-xl tracking-tighter italic">ROI_PRO</span>
         </div>
-        <h1 className="mt-4 text-2xl font-black tracking-tight">Washington Verdan</h1>
-        <p className="text-zinc-400 font-medium">Full Stack Developer & Tech Enthusiast</p>
-      </div>
+        <div className="bg-zinc-900 px-4 py-2 rounded-full border border-zinc-800 text-xs font-bold text-emerald-500 animate-pulse">
+          PROPOSTA ATIVA
+        </div>
+      </header>
 
-      {/* Grid de Links Estilo Apple */}
-      <main className="w-full max-w-[400px] z-10 space-y-4">
-        {links.map((link, i) => (
-          <a
-            key={i}
-            href={link.url}
-            className="group flex items-center p-4 bg-zinc-900/50 border border-zinc-800 backdrop-blur-xl rounded-2xl hover:scale-[1.02] hover:bg-zinc-800/80 transition-all duration-300 shadow-lg"
-          >
-            <div className={`${link.color} p-3 rounded-xl shadow-lg group-hover:rotate-12 transition-transform`}>
-              <link.icon size={20} color="white" />
+      <main className="max-w-4xl mx-auto bg-zinc-900/50 border border-zinc-800 rounded-[2.5rem] p-8 md:p-16 backdrop-blur-3xl shadow-2xl">
+        <h1 className="text-4xl md:text-6xl font-black mb-6 leading-tight">
+          Transforme <span className="text-emerald-500">R$ {val.toLocaleString()}</span> em <br />
+          <span className="underline decoration-emerald-500/30">R$ {roi.toLocaleString()}</span> de lucro.
+        </h1>
+        
+        <p className="text-zinc-400 text-lg mb-12 max-w-xl">
+          Esta é uma análise estratégica personalizada para o seu negócio crescer com previsibilidade.
+        </p>
+
+        {/* Grid de Benefícios */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+          {[
+            { t: "Garantia de Entrega", i: ShieldCheck },
+            { t: "Suporte Prioritário 24/7", i: Clock },
+            { t: "Estratégia Anti-Risco", i: DollarSign },
+            { t: "Relatórios em Tempo Real", i: CheckCircle2 },
+          ].map((item, idx) => (
+            <div key={idx} className="flex items-center gap-4 p-4 bg-black/40 rounded-2xl border border-zinc-800/50">
+              <item.i className="text-emerald-500" size={24} />
+              <span className="font-bold text-zinc-200">{item.t}</span>
             </div>
-            <span className="ml-4 font-bold text-lg">{link.name}</span>
-            <Share2 size={16} className="ml-auto text-zinc-600 group-hover:text-blue-400" />
-          </a>
-        ))}
-      </main>
+          ))}
+        </div>
 
-      {/* Rodapé Viral */}
-      <footer className="mt-auto py-8 text-zinc-500 text-xs flex flex-col items-center gap-4">
-        <button className="bg-white/5 hover:bg-white/10 px-6 py-2 rounded-full border border-white/10 transition-colors">
-          Obter uma página como esta 🚀
-        </button>
-        <p>© 2026 • Built with Gemini</p>
-      </footer>
+        {/* CTA - O Botão que Faz Dinheiro */}
+        <div className="flex flex-col items-center gap-6 border-t border-zinc-800 pt-12">
+          <div className="text-center">
+            <p className="text-zinc-500 text-sm uppercase tracking-widest mb-2 font-bold">Investimento Total</p>
+            <p className="text-5xl font-black text-white">R$ {val.toLocaleString()}</p>
+          </div>
+          
+          <button className="w-full max-w-md bg-emerald-500 hover:bg-emerald-400 text-black py-6 rounded-2xl font-black text-xl transition-all shadow-[0_0_30px_rgba(16,185,129,0.3)] hover:scale-[1.02] active:scale-95">
+            ACEITAR PROPOSTA E COMEÇAR
+          </button>
+          
+          <p className="text-zinc-600 text-xs italic italic">Link válido por apenas 24 horas.</p>
+        </div>
+      </main>
     </div>
   );
 }
