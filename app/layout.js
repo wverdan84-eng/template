@@ -1,12 +1,11 @@
-export const metadata = {
-  title: "SaaS Template",
-  description: "Template SaaS Next.js"
-};
+import { SessionProvider } from "next-auth/react";
 
 export default function RootLayout({ children }) {
   return (
     <html lang="pt-br">
-      <body>{children}</body>
+      <body>
+        <SessionProvider>{children}</SessionProvider>
+      </body>
     </html>
   );
 }
