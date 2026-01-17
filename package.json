@@ -1,0 +1,12 @@
+{
+  "name": "fidelizazap",
+  "version": "0.1.0",
+  "dependencies": {
+    "react": "latest",
+    "react-dom": "latest",
+    "next": "latest",
+    "lucide-react": "latest",
+    "clsx": "latest",
+    "tailwind-merge": "latest"
+  }
+}
