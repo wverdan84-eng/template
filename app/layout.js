@@ -2,7 +2,7 @@ import { Providers } from "./providers";
 
 export const metadata = {
   title: "SaaS Template",
-  description: "Template SaaS Next.js"
+  description: "Template SaaS"
 };
 
 export default function RootLayout({ children }) {
